@@ -87,6 +87,46 @@ public class PropertySubject extends Subject<PropertySubject, Class<?>> {
         }
     }
 
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @SuppressWarnings("deprecation")
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + (test == null ? 0 : test.hashCode());
+        return result;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#@SuppressWarnings("deprecation") equals(java.lang.Object)
+     */
+    @SuppressWarnings("deprecation")
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PropertySubject other = (PropertySubject) obj;
+        if (test == null) {
+            if (other.test != null) {
+                return false;
+            }
+        } else if (!test.equals(other.test)) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      *
      *
