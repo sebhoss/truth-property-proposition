@@ -6,8 +6,14 @@ p. "Truth":http://google.github.io/truth/ proposition for property validation.
 
 h3. Features
 
-* Verify that a property can be read/written from/to a specific class with a specific return/parameter type
-* Verify that a property is read-/write-only
+p. Verifies that a property
+
+* can be read
+* can be written
+* has a specific return type
+* has a specific parameter type
+* is read-only
+* is write-only
 
 h3. Development Status
 
