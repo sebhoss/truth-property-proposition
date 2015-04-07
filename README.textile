@@ -35,7 +35,7 @@ bc.. <dependency>
   <version>${version.truth-property-proposition}</version>
 </dependency>
 
-p. Replace ${version.truth-property-proposition} with the "latest release":http://search.maven.org/#search%7Cga%7C1%7Cg%3Acom.github.sebhoss.truth%20a%3Atruth-property-proposition. This project follows the "semantic versioning guidelines":http://semver.org/.
+p. Replace @${version.truth-property-proposition}@ with the "latest release":http://search.maven.org/#search%7Cga%7C1%7Cg%3Acom.github.sebhoss.truth%20a%3Atruth-property-proposition. This project follows the "semantic versioning guidelines":http://semver.org/.
 
 h3. Compatibility
 
