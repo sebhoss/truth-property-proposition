@@ -1,1 +1,50 @@
-# truth-property-proposition
+h1. truth-property-proposition
+
+h2. "!https://www.openhub.net/p/truth-property-proposition/widgets/project_thin_badge.gif!":https://www.openhub.net/p/truth-property-proposition/ "!https://img.shields.io/travis/sebhoss/truth-property-proposition/master.svg?style=flat-square!":http://travis-ci.org/sebhoss/truth-property-proposition "!https://img.shields.io/coveralls/sebhoss/truth-property-proposition/master.svg?style=flat-square!":https://coveralls.io/r/sebhoss/truth-property-proposition
+
+p. "Truth":http://google.github.io/truth/ proposition for property validation.
+
+h3. Features
+
+* Verify that a property can be read/written from/to a specific class with a specific return/parameter type
+* Verify that a property is read-/write-only
+
+h3. Development Status
+
+p. It does what it is supposed to do. Documentation is still lacking, tests can always be improved.
+
+h2. Usage
+
+p. You can hook into the "truth extension mechanism":http://google.github.io/truth/usage/#extensibility by using the @Truth.assertAbout(SF factory)@ method or using the more explicit @Truth.ASSERT.about(SF factory)@ call. The returned "subject":http://google.github.io/truth/api/0.25/com/google/common/truth/Subject.html can then be used to verify behaviour of a property like this:
+
+bc. Truth.ASSERT.about(PropertySubject.PROPERTIES).that(MyClass.class).allowsToRead("property");
+
+p. or using static imports like this:
+
+bc. ASSERT.about(PROPERTIES).that(MyClass.class).allowsToRead("property");
+
+p. The returned subject of the above @that@ call is of type @PropertySubject@ which is provided by this project.
+
+h3. Integration
+
+p. To use this project just declare the following dependency inside your POM:
+
+bc.. <dependency>
+  <groupId>com.github.sebhoss.truth</groupId>
+  <artifactId>truth-property-proposition</artifactId>
+  <version>${version.truth-property-proposition}</version>
+</dependency>
+
+p. Replace ${version.truth-property-proposition} with the "latest release":http://search.maven.org/#search%7Cga%7C1%7Cg%3Acom.github.sebhoss.truth%20a%3Atruth-property-proposition. This project follows the "semantic versioning guidelines":http://semver.org/.
+
+h3. Compatibility
+
+p. This project is compatible with the following Java versions:
+
+|_. Java Version |_. 1.X.Y |
+| Java 8 | ✓ |
+
+h2. License
+
+This project is licensed under the "UNLICENSE":http://unlicense.org/. See the UNLICENSE file for more information.
+
