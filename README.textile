@@ -53,4 +53,3 @@ p. This project is compatible with the following Java versions:
 h2. License
 
 This project is licensed under the "UNLICENSE":http://unlicense.org/. See the UNLICENSE file for more information.
-
