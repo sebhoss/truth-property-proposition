@@ -21,7 +21,7 @@ p. It does what it is supposed to do. Documentation is still lacking, tests can 
 
 h2. Usage
 
-p. You can hook into the "truth extension mechanism":http://google.github.io/truth/usage/#extensibility by using the @Truth.assertAbout(SF factory)@ method or using the more explicit @Truth.ASSERT.about(SF factory)@ call. The returned "subject":http://google.github.io/truth/api/0.25/com/google/common/truth/Subject.html can then be used to verify behaviour of a property like this:
+p. You can hook into the "truth extension mechanism":http://google.github.io/truth/usage/#extensibility by using the @Truth.assertAbout(SF factory)@ method or using the more explicit @Truth.ASSERT.about(SF factory)@ call. The returned "subject":http://google.github.io/truth/#new-types-new-propositions can then be used to verify behaviour of a property like this:
 
 bc. Truth.ASSERT.about(PropertySubject.PROPERTIES).that(MyClass.class).allowsToRead("property");
 
