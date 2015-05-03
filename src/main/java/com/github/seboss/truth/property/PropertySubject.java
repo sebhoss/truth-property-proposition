@@ -12,6 +12,7 @@ import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -87,49 +88,27 @@ public class PropertySubject extends Subject<PropertySubject, Class<?>> {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
-    @SuppressWarnings("deprecation")
     @Override
+    @SuppressWarnings("deprecation")
     public int hashCode() {
-        final int prime = 31;
-        int result = super.hashCode();
-        result = prime * result + (test == null ? 0 : test.hashCode());
-        return result;
+        return Objects.hashCode(test);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Object#@SuppressWarnings("deprecation") equals(java.lang.Object)
-     */
-    @SuppressWarnings("deprecation")
     @Override
+    @SuppressWarnings("deprecation")
     public boolean equals(final Object obj) {
-        if (this == obj) {
+        if (obj == null) {
             return true;
-        }
-        if (!super.equals(obj)) {
-            return false;
         }
         if (getClass() != obj.getClass()) {
             return false;
         }
         final PropertySubject other = (PropertySubject) obj;
-        if (test == null) {
-            if (other.test != null) {
-                return false;
-            }
-        } else if (!test.equals(other.test)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(test, other.test);
     }
 
     /**
-     *
-     *
+     * Performs verification on a single property
      */
     public static final class PropertySpecification {
 
@@ -155,8 +134,8 @@ public class PropertySubject extends Subject<PropertySubject, Class<?>> {
         public PropertySpecification withReturnType(final Type type) {
             final Subject<DefaultSubject, Object> expectedType = test.that(type);
             Optional.of(property.getReadMethod())
-                    .map(Method::getGenericReturnType)
-                    .ifPresent(expectedType::isEqualTo);
+            .map(Method::getGenericReturnType)
+            .ifPresent(expectedType::isEqualTo);
             return this;
         }
 
@@ -168,9 +147,9 @@ public class PropertySubject extends Subject<PropertySubject, Class<?>> {
         public PropertySpecification withParameterType(final Type type) {
             final Subject<DefaultSubject, Object> expectedType = test.that(type);
             Optional.of(property.getWriteMethod())
-                    .map(Method::getGenericParameterTypes)
-                    .map(types -> types[0])
-                    .ifPresent(expectedType::isEqualTo);
+            .map(Method::getGenericParameterTypes)
+            .map(types -> types[0])
+            .ifPresent(expectedType::isEqualTo);
             return this;
         }
 

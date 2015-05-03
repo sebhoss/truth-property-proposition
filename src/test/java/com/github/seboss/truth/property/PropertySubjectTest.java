@@ -61,4 +61,49 @@ public class PropertySubjectTest {
         classUnderTest.allowsToWrite("array").withParameterType(Object[].class).writeOnly();
     }
 
+    /**
+     *
+     */
+    @Test
+    @SuppressWarnings("static-method")
+    public void shouldImplementEquals() {
+        final PropertySubject subject1 = ASSERT.about(PROPERTIES).that(TestClass.class);
+        final PropertySubject subject2 = ASSERT.about(PROPERTIES).that(TestClass.class);
+
+        subject1.equals(subject2);
+    }
+
+    /**
+     *
+     */
+    @Test
+    @SuppressWarnings("static-method")
+    public void shouldImplementEqualsNull() {
+        final PropertySubject subject1 = ASSERT.about(PROPERTIES).that(TestClass.class);
+
+        subject1.equals(null);
+    }
+
+    /**
+     *
+     */
+    @Test
+    @SuppressWarnings("static-method")
+    public void shouldImplementEqualsOtherClass() {
+        final PropertySubject subject1 = ASSERT.about(PROPERTIES).that(TestClass.class);
+
+        subject1.equals("test");
+    }
+
+    /**
+     *
+     */
+    @Test
+    @SuppressWarnings("static-method")
+    public void shouldImplementHashCode() {
+        final PropertySubject subject1 = ASSERT.about(PROPERTIES).that(TestClass.class);
+
+        subject1.hashCode();
+    }
+
 }
