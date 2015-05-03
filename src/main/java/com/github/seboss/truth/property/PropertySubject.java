@@ -6,9 +6,8 @@
  */
 package com.github.seboss.truth.property;
 
-import static java.beans.Introspector.getBeanInfo;
-
-import java.beans.IntrospectionException;
+import java.beans.BeanInfo;
+import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
@@ -22,6 +21,8 @@ import com.google.common.truth.FailureStrategy;
 import com.google.common.truth.Subject;
 import com.google.common.truth.SubjectFactory;
 import com.google.common.truth.TestVerb;
+
+import org.jooq.lambda.Unchecked;
 
 /**
  *
@@ -78,14 +79,13 @@ public class PropertySubject extends Subject<PropertySubject, Class<?>> {
     }
 
     private PropertyDescriptor descriptor(final String property) {
-        try {
-            return Stream.of(getBeanInfo(getSubject()).getPropertyDescriptors())
-                    .filter(descriptor -> property.equals(descriptor.getName()))
-                    .findFirst()
-                    .orElseThrow(IllegalArgumentException::new);
-        } catch (final IntrospectionException exception) {
-            throw new AssertionError(exception);
-        }
+        return Stream.of(Optional.of(getSubject())
+                    .map(Unchecked.function(Introspector::getBeanInfo))
+                    .map(BeanInfo::getPropertyDescriptors)
+                    .orElseThrow(IllegalStateException::new))
+                .filter(descriptor -> property.equals(descriptor.getName()))
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     @Override
@@ -134,8 +134,8 @@ public class PropertySubject extends Subject<PropertySubject, Class<?>> {
         public PropertySpecification withReturnType(final Type type) {
             final Subject<DefaultSubject, Object> expectedType = test.that(type);
             Optional.of(property.getReadMethod())
-            .map(Method::getGenericReturnType)
-            .ifPresent(expectedType::isEqualTo);
+                    .map(Method::getGenericReturnType)
+                    .ifPresent(expectedType::isEqualTo);
             return this;
         }
 
@@ -147,9 +147,9 @@ public class PropertySubject extends Subject<PropertySubject, Class<?>> {
         public PropertySpecification withParameterType(final Type type) {
             final Subject<DefaultSubject, Object> expectedType = test.that(type);
             Optional.of(property.getWriteMethod())
-            .map(Method::getGenericParameterTypes)
-            .map(types -> types[0])
-            .ifPresent(expectedType::isEqualTo);
+                    .map(Method::getGenericParameterTypes)
+                    .map(types -> types[0])
+                    .ifPresent(expectedType::isEqualTo);
             return this;
         }
 
