@@ -46,7 +46,6 @@
   <properties>
     <version.bom>3.0.4</version.bom>
 
-    <coverage>0.9</coverage>
   </properties>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
